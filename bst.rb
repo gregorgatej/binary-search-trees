@@ -25,6 +25,10 @@ class Tree
     @root = insert_rec(@root, value)
   end
 
+  def delete(value)
+    @root = delete_rec(@root, value)
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -53,6 +57,33 @@ class Tree
     elsif value > node.data
       node.right = insert_rec(node.right, value)
     end
+
+    node
+  end
+
+  def delete_rec(node, value)
+    return nil if node.nil?
+
+    if value < node.data
+      node.left = delete_rec(node.left, value)
+    elsif value > node.data
+      node.right = delete_rec(node.right, value)
+    else
+      # Node with only one child or no child
+      return node.right if node.left.nil?
+      return node.left if node.right.nil?
+
+      # Node with two children: get the inorder successor (smallest in right subtree)
+      min_larger_node = find_min(node.right)
+      node.data = min_larger_node.data
+      node.right = delete_rec(node.right, min_larger_node.data)
+    end
+
+    node
+  end
+
+  def find_min(node)
+    node = node.left while node.left
 
     node
   end
