@@ -33,19 +33,23 @@ class Tree
     find_rec(@root, value)
   end
 
-  def level_order_values
+  def level_order
     return [] if @root.nil?
 
     queue = [@root]
     result = []
     until queue.empty?
       current = queue.shift
-      result << current.data
+      if block_given?
+        yield current
+      else
+        result << current.data
+      end
       queue << current.left if current.left
       queue << current.right if current.right
     end
 
-    result
+    result unless block_given?
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
