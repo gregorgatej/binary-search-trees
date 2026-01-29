@@ -1,6 +1,6 @@
 # Binary Search Trees
 
-his project provides a Ruby implementation of a Binary Search Tree (BST) with the following features:
+This project provides a Ruby implementation of a Binary Search Tree (BST) with the following features:
 
 - Node and Tree classes for BST structure and operations
 - Methods for insertion, deletion, and search
