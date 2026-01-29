@@ -1,4 +1,4 @@
-# Binary Search Trees
+# Binary Search Tree
 
 This project provides a Ruby implementation of a Binary Search Tree (BST) with the following features:
 
